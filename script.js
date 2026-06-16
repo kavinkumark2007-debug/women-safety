@@ -1,26 +1,65 @@
-function sendSOS(){
+// Firebase reference (optional - if you configured firebase.js)
+let database = null;
+
+if (typeof firebase !== "undefined") {
+  database = firebase.database();
+}
+
+// 🚨 SEND SOS
+function sendSOS() {
   let name = document.getElementById("name").value;
 
-  navigator.geolocation.getCurrentPosition(function(pos){
+  if (name === "") {
+    alert("Please enter your name!");
+    return;
+  }
 
-    firebase.database().ref("SOS Alerts").push({
+  alert("🚨 SOS SENT!");
+
+  // Optional: Save to Firebase
+  if (database) {
+    database.ref("sosAlerts").push({
       name: name,
-      latitude: pos.coords.latitude,
-      longitude: pos.coords.longitude,
-      time: new Date().toLocaleString()
+      time: new Date().toString(),
+      message: "Emergency SOS Triggered"
     });
+  }
 
-    alert("SOS SENT!");
-
-  });
+  console.log("SOS triggered by:", name);
 }
 
-function callEmergency(){
-  window.location.href = "tel:100";
+
+// 📞 CALL EMERGENCY
+function callEmergency() {
+  // India emergency number example
+  window.location.href = "tel:112";
 }
 
-function playAlarm(){
-  let audio = new Audio("alarm.mp3");
-  audio.loop = true;
+
+// 🔔 PLAY ALARM
+function playAlarm() {
+  let audio = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
   audio.play();
+
+  alert("🔔 Alarm Playing!");
+}
+
+
+// 📍 OPTIONAL: Get location (future upgrade use)
+function getLocation(callback) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        callback({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+      },
+      function (error) {
+        alert("Location access denied!");
+      }
+    );
+  } else {
+    alert("Geolocation not supported");
+  }
 }
