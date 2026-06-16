@@ -5,7 +5,8 @@
 <title>Women Safety SOS</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link rel="manifest" href="manifest.json">
+  
 <link rel="stylesheet" href="style.css">
 
 <!-- Firebase -->
@@ -22,11 +23,18 @@
 <p>Enter your name & press SOS button</p>
 
 <!-- INPUT -->
-<input type="text" id="name" placeholder="Enter Name"
+<input type="text" id="name" placeholder="Enter your Name"
 style="padding:10px;width:80%;border-radius:5px;"><br><br>
 
 <!-- SOS BUTTON -->
 <button onclick="sendSOS()"
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+
 style="background:red;color:white;padding:15px;width:80%;font-size:18px;border:none;border-radius:10px;">
 🚨 SEND SOS
 </button>
