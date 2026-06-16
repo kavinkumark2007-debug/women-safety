@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>SOS Alerts Monitor</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+</head>
+
+<body>
+
+<h2>SOS Alerts</h2>
+
+<ul id="alertsList"></ul>
+
+<script src="firebase.js"></script>
+
+<script>
+
+var alertsList = document.getElementById("alertsList");
+
+firebase.database().ref("SOS Alerts").on("child_added", function(snapshot){
+
+var data = snapshot.val();
+
+var li = document.createElement("li");
+
+li.innerHTML =
+data.name + " | " +
+'<a href="https://www.google.com/maps?q=' +
+data.latitude + ',' +
+data.longitude +
+'" target="_blank">View Location</a>' +
+" | " +
+data.time;
+
+alertsList.appendChild(li);
+
+});
+
+</script>
+
+</body>
+</html>
