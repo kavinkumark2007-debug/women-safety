@@ -1,26 +1,26 @@
 function sendSOS(){
+  let name = document.getElementById("name").value;
 
-let name = document.getElementById("name").value;
+  navigator.geolocation.getCurrentPosition(function(pos){
 
-if(!name){
-  alert("Enter name");
-  return;
+    firebase.database().ref("SOS Alerts").push({
+      name: name,
+      latitude: pos.coords.latitude,
+      longitude: pos.coords.longitude,
+      time: new Date().toLocaleString()
+    });
+
+    alert("SOS SENT!");
+
+  });
 }
 
-navigator.geolocation.getCurrentPosition(function(position){
+function callEmergency(){
+  window.location.href = "tel:100";
+}
 
-let latitude = position.coords.latitude;
-let longitude = position.coords.longitude;
-
-firebase.database().ref("SOS Alerts").push({
-name: name,
-latitude: latitude,
-longitude: longitude,
-time: new Date().toLocaleString()
-});
-
-alert("SOS Sent Successfully!");
-
-});
-
+function playAlarm(){
+  let audio = new Audio("alarm.mp3");
+  audio.loop = true;
+  audio.play();
 }
