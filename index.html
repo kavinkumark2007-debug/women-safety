@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
-  <head>
-
 <title>Women Safety SOS</title>
 
-<link rel="stylesheet" href="style.css">
-    
-<title>Women Safety SOS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
 
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+>
 
 </head>
 
-<body>
+<body style="background:#111;color:white;text-align:center;font-family:sans-serif;">
 
-<h1>Women Safety SOS System</h1>
+<h1 style="color:red;">🚨 WOMEN SAFETY SOS</h1>
 
-<p>Press SOS to share your live location</p>
+<p>Enter your name & press SOS button</p>
 
-<input type="text" id="name" placeholder="Enter your Name">
+<!-- INPUT -->
+<input type="text" id="name" placeholder="Enter Name"
+style="padding:10px;width:80%;border-radius:5px;"><br><br>
+
+<!-- SOS BUTTON -->
+<button onclick="sendSOS()"
+style="background:red;color:white;padding:15px;width:80%;font-size:18px;border:none;border-radius:10px;">
+🚨 SEND SOS
+</button>
 
 <br><br>
 
-<button onclick="sendSOS()" style="background:red;color:white;padding:10px;">
-SEND SOS
+<!-- OPTIONAL BUTTONS -->
+<button onclick="callEmergency()"
+style="background:green;color:white;padding:10px;width:80%;">
+📞 CALL EMERGENCY
 </button>
 
+<br><br>
+
+<button onclick="playAlarm()"
+style="background:orange;color:white;padding:10px;width:80%;">
+🔔 PLAY ALARM
+</button>
+
+<!-- SCRIPTS -->
 <script src="firebase.js"></script>
 <script src="script.js"></script>
 
 </body>
-
 </html>
