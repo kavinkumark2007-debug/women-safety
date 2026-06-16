@@ -1,53 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Dashboard</title>
+  <title>Women Safety Admin Dashboard</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
   <style>
-    body { font-family: Arial; }
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      color: red;
+    }
+
     .card {
-      border: 1px solid red;
-      padding: 10px;
+      background: white;
       margin: 10px;
+      padding: 15px;
+      border-left: 5px solid red;
+      border-radius: 5px;
+    }
+
+    a {
+      color: blue;
     }
   </style>
 </head>
 
 <body>
 
-<h1>🚨 SOS Admin Dashboard</h1>
+<h1>🚨 SOS ADMIN DASHBOARD</h1>
 
-<div id="data"></div>
+<!-- IMPORTANT: data show aagura place -->
+<div id="alerts"></div>
 
 <script src="firebase.js"></script>
 
 <script>
 firebase.database().ref("SOS Alerts").on("value", function(snapshot){
 
-let data = snapshot.val();
-let output = "";
+  let data = snapshot.val();
+  let output = "";
 
-for(let id in data){
+  if(data){
 
-output += `
-<div class="card">
-<h3>Name: ${data[id].name}</h3>
-<p>Time: ${data[id].time}</p>
+    for(let id in data){
 
-<a target="_blank"
-href="https://www.google.com/maps?q=${data[id].latitude},${data[id].longitude}">
-View Location
-</a>
+      output += `
+        <div class="card">
+          <h3>Name: ${data[id].name}</h3>
+          <p>Time: ${data[id].time}</p>
 
-</div>
-`;
+          <a target="_blank"
+          href="https://www.google.com/maps?q=${data[id].latitude},${data[id].longitude}">
+          📍 View Location
+          </a>
+        </div>
+      `;
+    }
 
-}
+  } else {
+    output = "<h3>No SOS Alerts yet</h3>";
+  }
 
-document.getElementById("data").innerHTML = output;
+  document.getElementById("alerts").innerHTML = output;
 
 });
 </script>
