@@ -6,13 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
-  
 <link rel="stylesheet" href="style.css">
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
->
 
 </head>
 
@@ -28,20 +26,13 @@ style="padding:10px;width:80%;border-radius:5px;"><br><br>
 
 <!-- SOS BUTTON -->
 <button onclick="sendSOS()"
-
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
-</script>
-
 style="background:red;color:white;padding:15px;width:80%;font-size:18px;border:none;border-radius:10px;">
 🚨 SEND SOS
 </button>
 
 <br><br>
 
-<!-- OPTIONAL BUTTONS -->
+<!-- CALL BUTTON -->
 <button onclick="callEmergency()"
 style="background:green;color:white;padding:10px;width:80%;">
 📞 CALL EMERGENCY
@@ -49,12 +40,21 @@ style="background:green;color:white;padding:10px;width:80%;">
 
 <br><br>
 
+<!-- ALARM BUTTON -->
 <button onclick="playAlarm()"
 style="background:orange;color:white;padding:10px;width:80%;">
 🔔 PLAY ALARM
 </button>
 
-<!-- SCRIPTS -->
+<!-- SERVICE WORKER -->
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+  .then(() => console.log("SW Registered"));
+}
+</script>
+
+<!-- YOUR JS FILES -->
 <script src="firebase.js"></script>
 <script src="script.js"></script>
 
